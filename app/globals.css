@@ -1,0 +1,450 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Google Fonts: Bricolage Grotesque + Outfit
+  In production with network access, add to <head>:
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+*/
+
+/* CSS variable font definitions with system fallbacks */
+:root {
+  --font-bricolage: 'Bricolage Grotesque', 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-outfit: 'Outfit', 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+/* ============================================================
+   CSS CUSTOM PROPERTIES — ALL THEMES
+   ============================================================ */
+
+:root {
+  /* NeuroLearn (default dark theme) */
+  --bg: #06080F;
+  --bg-surface: #0D1117;
+  --bg-elevated: #161B24;
+  --accent: #4F7EFF;
+  --accent-secondary: #00CFFF;
+  --accent-tertiary: #00FFB3;
+  --text-primary: #F0F4FF;
+  --text-secondary: #8B9CC8;
+  --text-muted: #4A5568;
+  --border: rgba(79, 126, 255, 0.15);
+  --border-hover: rgba(79, 126, 255, 0.4);
+  --glow-color: rgba(79, 126, 255, 0.3);
+  --card-bg: rgba(13, 17, 23, 0.8);
+  --glass-bg: rgba(13, 17, 23, 0.6);
+  --glass-border: rgba(79, 126, 255, 0.2);
+}
+
+[data-theme="neurokids"] {
+  --bg: #FFFAF5;
+  --bg-surface: #FFF5EC;
+  --bg-elevated: #FFEDE0;
+  --accent: #FF5C3A;
+  --accent-secondary: #FFAD3A;
+  --accent-tertiary: #3AD68F;
+  --text-primary: #1A1A1A;
+  --text-secondary: #4A3728;
+  --text-muted: #8B7355;
+  --border: rgba(255, 92, 58, 0.2);
+  --border-hover: rgba(255, 92, 58, 0.5);
+  --glow-color: rgba(255, 92, 58, 0.25);
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 92, 58, 0.25);
+}
+
+[data-theme="neurolearn"] {
+  --bg: #06080F;
+  --bg-surface: #0D1117;
+  --bg-elevated: #161B24;
+  --accent: #4F7EFF;
+  --accent-secondary: #00CFFF;
+  --accent-tertiary: #00FFB3;
+  --text-primary: #F0F4FF;
+  --text-secondary: #8B9CC8;
+  --text-muted: #4A5568;
+  --border: rgba(79, 126, 255, 0.15);
+  --border-hover: rgba(79, 126, 255, 0.4);
+  --glow-color: rgba(79, 126, 255, 0.3);
+  --card-bg: rgba(13, 17, 23, 0.8);
+  --glass-bg: rgba(13, 17, 23, 0.6);
+  --glass-border: rgba(79, 126, 255, 0.2);
+}
+
+[data-theme="advanced"] {
+  --bg: #080609;
+  --bg-surface: #0F0C12;
+  --bg-elevated: #18141E;
+  --accent: #C9971E;
+  --accent-secondary: #7C3AED;
+  --accent-tertiary: #F5F0E5;
+  --text-primary: #F5F0E5;
+  --text-secondary: #B8A99A;
+  --text-muted: #6B5B4E;
+  --border: rgba(201, 151, 30, 0.2);
+  --border-hover: rgba(201, 151, 30, 0.5);
+  --glow-color: rgba(201, 151, 30, 0.25);
+  --card-bg: rgba(15, 12, 18, 0.85);
+  --glass-bg: rgba(15, 12, 18, 0.65);
+  --glass-border: rgba(201, 151, 30, 0.2);
+}
+
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-outfit);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-bricolage);
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* ============================================================
+   KEYFRAME ANIMATIONS
+   ============================================================ */
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-15px) rotate(1deg); }
+  66% { transform: translateY(-8px) rotate(-1deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; box-shadow: 0 0 10px var(--glow-color); }
+  50% { opacity: 0.8; box-shadow: 0 0 30px var(--glow-color), 0 0 60px var(--glow-color); }
+}
+
+@keyframes fade-up {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 5px var(--glow-color); }
+  50% { box-shadow: 0 0 25px var(--glow-color), 0 0 50px var(--glow-color); }
+}
+
+@keyframes bounce-dot {
+  0%, 80%, 100% { transform: scale(0); opacity: 0; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes slide-in-right {
+  0% { opacity: 0; transform: translateX(30px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slide-in-left {
+  0% { opacity: 0; transform: translateX(-30px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes rotate-gradient {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes ping-slow {
+  0% { transform: scale(1); opacity: 0.8; }
+  75%, 100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* ============================================================
+   UTILITY CLASSES
+   ============================================================ */
+
+/* Shimmer text */
+.shimmer-text {
+  background: linear-gradient(
+    90deg,
+    var(--text-primary) 0%,
+    var(--accent) 25%,
+    var(--accent-secondary) 50%,
+    var(--accent) 75%,
+    var(--text-primary) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+/* Dot grid texture overlay */
+.dot-grid {
+  position: relative;
+}
+
+.dot-grid::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dot-grid > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Glassmorphism */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+}
+
+.glass-strong {
+  background: rgba(13, 17, 23, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+}
+
+/* Card hover lift */
+.card-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px var(--glow-color);
+}
+
+/* Ambient glow backgrounds */
+.ambient-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.ambient-bg::after {
+  content: '';
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  width: 600px;
+  height: 600px;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, var(--glow-color) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Gradient button */
+.btn-gradient {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+  color: white;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.btn-gradient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--accent-secondary) 0%, var(--accent) 100%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.btn-gradient:hover::before {
+  opacity: 1;
+}
+
+/* XP bar glow */
+.xp-bar-fill {
+  background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+  box-shadow: 0 0 10px var(--glow-color);
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================================
+   CUSTOM SCROLLBAR
+   ============================================================ */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-hover);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-hover) var(--bg-surface);
+}
+
+/* ============================================================
+   COMPONENT STYLES
+   ============================================================ */
+
+/* Typing dots */
+.typing-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: bounce-dot 1.4s ease-in-out infinite;
+}
+
+.typing-dot:nth-child(2) { animation-delay: 0.16s; }
+.typing-dot:nth-child(3) { animation-delay: 0.32s; }
+
+/* Skill tree node */
+.skill-node {
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.skill-node:hover {
+  transform: scale(1.1);
+}
+
+.skill-node.mastered {
+  box-shadow: 0 0 15px var(--accent-tertiary);
+}
+
+.skill-node.in-progress {
+  box-shadow: 0 0 15px var(--accent);
+}
+
+/* Achievement badge */
+.badge-earned {
+  filter: drop-shadow(0 0 8px var(--glow-color));
+}
+
+.badge-locked {
+  filter: grayscale(1) opacity(0.4);
+}
+
+/* Mastery ring */
+.mastery-ring {
+  filter: drop-shadow(0 0 8px var(--glow-color));
+}
+
+/* Streak flame */
+.streak-flame {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* ============================================================
+   RESPONSIVE UTILITIES
+   ============================================================ */
+
+@media (max-width: 375px) {
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.5rem; }
+}
+
+/* ============================================================
+   PROSE STYLES FOR AI MARKDOWN OUTPUT
+   ============================================================ */
+
+.prose-nero {
+  line-height: 1.7;
+  color: var(--text-primary);
+}
+
+.prose-nero strong {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.prose-nero code {
+  background: var(--bg-elevated);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.875em;
+  color: var(--accent-secondary);
+  font-family: 'Courier New', monospace;
+}
+
+.prose-nero pre {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  overflow-x: auto;
+  margin: 12px 0;
+}
+
+.prose-nero pre code {
+  background: none;
+  padding: 0;
+}
+
+.prose-nero ul, .prose-nero ol {
+  padding-left: 1.5rem;
+  margin: 8px 0;
+}
+
+.prose-nero li {
+  margin: 4px 0;
+}
+
+.prose-nero blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 12px;
+  margin: 8px 0;
+  opacity: 0.8;
+}
+
+.prose-nero h1, .prose-nero h2, .prose-nero h3 {
+  color: var(--text-primary);
+  margin: 12px 0 8px;
+}
+
+.prose-nero p {
+  margin: 8px 0;
+}
